@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AI-Powered Secure Password Generator - Create strong, unique passwords with advanced customization options">
+    <meta name="author" content="AI Password Generator">
+    <title>AI Password Generator - Secure & Customizable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal active">
+        <div class="modal-content">
+            <div class="auth-header">
+                <div class="logo">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect width="48" height="48" rx="12" fill="url(#gradient1)" />
+                        <path
+                            d="M24 14C19.58 14 16 17.58 16 22V26H14V34H34V26H32V22C32 17.58 28.42 14 24 14ZM24 16C27.31 16 30 18.69 30 22V26H18V22C18 18.69 20.69 16 24 16ZM24 28C25.1 28 26 28.9 26 30C26 31.1 25.1 32 24 32C22.9 32 22 31.1 22 30C22 28.9 22.9 28 24 28Z"
+                            fill="white" />
+                        <defs>
+                            <linearGradient id="gradient1" x1="0" y1="0" x2="48" y2="48">
+                                <stop offset="0%" stop-color="#6366f1" />
+                                <stop offset="100%" stop-color="#8b5cf6" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <h1>SecurePass AI</h1>
+                </div>
+                <p class="tagline">Your intelligent password companion</p>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <h2>Welcome Back</h2>
+                <form id="loginFormElement">
+                    <div class="input-group">
+                        <label for="loginEmail">Email or Username</label>
+                        <input type="text" id="loginEmail" placeholder="Enter your email or username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="showRegister">Create one</a></p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="auth-form hidden">
+                <h2>Create Account</h2>
+                <form id="registerFormElement">
+                    <div class="input-group">
+                        <label for="registerUsername">Username</label>
+                        <input type="text" id="registerUsername" placeholder="Choose a username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" placeholder="Create a password (min 8 characters)"
+                            required minlength="8">
+                    </div>
+                    <div class="input-group">
+                        <label for="registerConfirmPassword">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" placeholder="Confirm your password"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="url(#gradient2)" />
+                            <path
+                                d="M24 14C19.58 14 16 17.58 16 22V26H14V34H34V26H32V22C32 17.58 28.42 14 24 14ZM24 16C27.31 16 30 18.69 30 22V26H18V22C18 18.69 20.69 16 24 16ZM24 28C25.1 28 26 28.9 26 30C26 31.1 25.1 32 24 32C22.9 32 22 31.1 22 30C22 28.9 22.9 28 24 28Z"
+                                fill="white" />
+                            <defs>
+                                <linearGradient id="gradient2" x1="0" y1="0" x2="48" y2="48">
+                                    <stop offset="0%" stop-color="#6366f1" />
+                                    <stop offset="100%" stop-color="#8b5cf6" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>SecurePass AI</span>
+                    </div>
+                    <div class="user-section">
+                        <button class="btn-icon" id="themeToggle" title="Toggle theme">
+                            <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                            <svg class="theme-icon sun-icon hidden" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                        </button>
+                        <span class="username" id="currentUsername"></span>
+                        <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Password Generator Section -->
+            <section class="generator-section">
+                <div class="section-header">
+                    <h2>Generate Secure Password</h2>
+                    <p>Customize your password requirements below</p>
+                </div>
+
+                <div class="generator-card">
+                    <!-- Generated Password Display -->
+                    <div class="password-display">
+                        <div class="password-wrapper">
+                            <input type="text" id="generatedPassword" readonly
+                                placeholder="Click Generate to create password">
+                            <button class="icon-btn" id="copyBtn" title="Copy to clipboard">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="strength-meter">
+                            <div class="strength-bar" id="strengthBar"></div>
+                        </div>
+                        <p class="strength-text" id="strengthText">No password generated</p>
+                    </div>
+
+                    <!-- Password Options -->
+                    <div class="password-options">
+                        <div class="option-group">
+                            <label for="passwordLength">Password Length: <span id="lengthValue">16</span></label>
+                            <input type="range" id="passwordLength" min="8" max="64" value="16">
+                        </div>
+
+                        <div class="options-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeUppercase" checked>
+                                <span>Uppercase (A-Z)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeLowercase" checked>
+                                <span>Lowercase (a-z)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeNumbers" checked>
+                                <span>Numbers (0-9)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeSpecial" checked>
+                                <span>Special (!@#$%...)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="excludeSimilar">
+                                <span>Exclude Similar (O,0,l,I,1)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="memorableMode">
+                                <span>Memorable Mode</span>
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary btn-large" id="generateBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
+                            </svg>
+                            Generate Password
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Tips Section -->
+            <section class="tips-section">
+                <h3>Security Tips & Quick Actions</h3>
+                <div class="tips-grid">
+                    <div class="tip-card tip-action-card" data-action="generate-unique">
+                        <div class="tip-icon">🔒</div>
+                        <h4>Use Unique Passwords</h4>
+                        <p>Never reuse passwords across different accounts to prevent credential stuffing attacks</p>
+                        <button class="tip-action-btn">Generate Unique Password</button>
+                    </div>
+                    <div class="tip-card tip-action-card" data-action="set-length">
+                        <div class="tip-icon">📏</div>
+                        <h4>Length Matters</h4>
+                        <p>Longer passwords (16+ characters) are exponentially harder to crack than shorter ones</p>
+                        <button class="tip-action-btn">Set to 20 Characters</button>
+                    </div>
+                    <div class="tip-card tip-action-card" data-action="enable-all">
+                        <div class="tip-icon">🎯</div>
+                        <h4>Mix Character Types</h4>
+                        <p>Combine uppercase, lowercase, numbers, and special characters for maximum security</p>
+                        <button class="tip-action-btn">Enable All Types</button>
+                    </div>
+                    <div class="tip-card tip-action-card" data-action="copy-password">
+                        <div class="tip-icon">💾</div>
+                        <h4>Use a Password Manager</h4>
+                        <p>Store your generated passwords securely in a reputable password manager</p>
+                        <button class="tip-action-btn">Copy Current Password</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Password History Section -->
+            <section class="history-section">
+                <div class="section-header">
+                    <h3>Password History</h3>
+                    <button class="btn btn-secondary btn-small" id="clearHistoryBtn">Clear History</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <p class="empty-state">No passwords generated yet</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 SecurePass AI. Your security is our priority.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
